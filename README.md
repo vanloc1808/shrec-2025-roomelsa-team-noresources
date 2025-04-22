@@ -1,0 +1,1 @@
+# shrec-2025-roomelsa-team-noresource
