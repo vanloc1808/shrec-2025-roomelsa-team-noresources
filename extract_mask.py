@@ -4,7 +4,7 @@ from PIL import Image
 from tqdm import tqdm
 from scipy import ndimage
 
-SCENE_DIR = "private_data/scenes"
+SCENE_DIR = "./data/private/scenes"
 MASK_COLOR = (135, 206, 235)  # RGB của vùng mask
 PADDING = 10  # Pixel padding khi crop
 
@@ -46,13 +46,16 @@ def process_all_scenes():
         input_path = os.path.join(scene_path, "masked.png")
         mask_output = os.path.join(scene_path, "mask.png")
         crop_output = os.path.join(scene_path, "crop.png")
+        try:
+            image = Image.open(input_path).convert("RGB")
+            mask_img, crop_img = extract_mask_and_crop(image)
 
-        image = Image.open(input_path).convert("RGB")
-        mask_img, crop_img = extract_mask_and_crop(image)
-
-        mask_img.save(mask_output)
-        if crop_img:
-            crop_img.save(crop_output)
+            mask_img.save(mask_output)
+            if crop_img:
+                crop_img.save(crop_output)
+        # Used for .DS_Store files on MacOS
+        except NotADirectoryError:
+            print(f"Directory {scene_path} does not exist. Skipping.")
 
 if __name__ == '__main__':
     process_all_scenes()
