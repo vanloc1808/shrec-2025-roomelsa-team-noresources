@@ -30,16 +30,16 @@ pip install -r requirements.txt
 
 ### Running the code
 
-First of all, you need to run mask extraction process.
-Please make sure to change `SCENE_DIR` constant in the `extract_mask.py` to the directory contain scenes files (in my cases, it is `data/private/scenes`).
+First of all, you need to run the mask extraction process.  
+Please make sure to change `SCENE_DIR` constant in the `extract_mask.py` to the directory contain scenes files (in my cases, it is `data/private/scenes`).  
 Then, run the following command to extract the masks.
 
 ```bash
 python extract_mask.py
 ```
 
-After that, run the main script for retrieval.
-Please make sure to change `SCENE_DIR` constant in the `run.py` to the directory containing scenes files (in my cases, it is `data/private/scenes`), and `OBJECT_DIR` to the directory containing object files (in my cases, it is `data/private/objects`).
+After that, run the main script for retrieval.  
+Please make sure to change `SCENE_DIR` constant in the `run.py` to the directory containing scenes files (in my cases, it is `data/private/scenes`), and `OBJECT_DIR` to the directory containing object files (in my cases, it is `data/private/objects`).  
 Then, run the following command to run the retrieval.
 
 ```bash
