@@ -18,7 +18,7 @@ MASK_COLOR = (135, 206, 235)
 
 # Load CLIP model
 # clip_model_name = "openai/clip-vit-large-patch14"
-clip_model_name = "openai/clip-vit-large-patch14-336"  # Use the larger model for better performance	
+clip_model_name = "openai/clip-vit-large-patch14-224"  # Use the larger model for better performance
 model = CLIPModel.from_pretrained(clip_model_name).to(device)
 processor = CLIPProcessor.from_pretrained(clip_model_name)
 
@@ -48,20 +48,20 @@ def encode_all_objects():
     for obj_id in tqdm(sorted(os.listdir(OBJECT_DIR)), desc="Encoding objects"):
         img_path = os.path.join(OBJECT_DIR, obj_id, "image.jpg")
         image = Image.open(img_path).convert("RGB")
-        
+
         image_binary = remove(image)
         image_binary = np.array(image_binary)
         image_binary = (image_binary > 0).astype(np.uint8) * 255
         image_binary = Image.fromarray(image_binary)
 
         image_binary.save("debug.png")
-        
+
         inputs = processor(images=image, return_tensors="pt").to(device)
         inputs_binary = processor(images=image_binary, return_tensors="pt").to(device)
         with torch.no_grad():
             feat = model.get_image_features(**inputs).cpu().numpy().squeeze()
             feat_binary = model.get_image_features(**inputs_binary).cpu().numpy().squeeze()
-        
+
         obj_feats[obj_id] = feat
         obj_feats_binary[obj_id] = feat_binary
     return obj_feats, obj_feats_binary
@@ -139,10 +139,10 @@ def major_voting(scene_ids, obj_feats, obj_feats_binary):
 
         for obj_id in match_by_text(scene_id, obj_feats)[:10]:
             counter[obj_id] += 2
-            
+
         for obj_id in match_by_text_then_shape_order_by_text(scene_id, obj_feats, obj_feats_binary):
             counter[obj_id] += 1
-            
+
         for obj_id in match_by_shape(scene_id, obj_feats_binary)[:10]:
             counter[obj_id] += 1
 
