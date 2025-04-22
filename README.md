@@ -11,7 +11,7 @@ Technical report will be linked later.
 ### Environment setup
 
 First, please create a separate virtual environment for the project.
-You can use [`conda`](https://www.anaconda.com/), [`venv`](https://docs.python.org/3/library/venv.html), or [`uv`](https://docs.astral.sh/uv/) to create the environment.
+You can use [`conda`](https://www.anaconda.com/), [`venv`](https://docs.python.org/3/library/venv.html), or [`uv`](https://docs.astral.sh/uv/) to create the environment.  
 It is recommended to use Python 3.11 or later.
 
 ```bash
