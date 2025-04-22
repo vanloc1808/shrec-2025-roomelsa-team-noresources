@@ -178,23 +178,23 @@ if __name__ == '__main__':
     obj_feats, obj_feats_binary = encode_all_objects()
 
     result_shape = {sid: match_by_shape(sid, obj_feats_binary)[:10] for sid in scene_ids}
-    save_submission_csv(result_shape, "selab_shape_only.csv")
+    save_submission_csv(result_shape, "noresource_shape_only.csv")
     save_visual_outputs("shape_only", scene_ids, result_shape)
 
     result_text = {sid: match_by_text(sid, obj_feats)[:10] for sid in scene_ids}
-    save_submission_csv(result_text, "selab_text_only.csv")
+    save_submission_csv(result_text, "noresource_text_only.csv")
     save_visual_outputs("text_only", scene_ids, result_text)
 
     result_text_shape = {sid: match_by_text_then_shape(sid, obj_feats, obj_feats_binary) for sid in scene_ids}
-    save_submission_csv(result_text_shape, "selab_text_then_shape_by_shape.csv")
+    save_submission_csv(result_text_shape, "noresource_text_then_shape_by_shape.csv")
     save_visual_outputs("text_then_shape_by_shape", scene_ids, result_text_shape)
 
     result_text_shape_by_text = {sid: match_by_text_then_shape_order_by_text(sid, obj_feats, obj_feats_binary) for sid in scene_ids}
-    save_submission_csv(result_text_shape_by_text, "selab_text_then_shape_by_text.csv")
+    save_submission_csv(result_text_shape_by_text, "noresource_text_then_shape_by_text.csv")
     save_visual_outputs("text_then_shape_by_text", scene_ids, result_text_shape_by_text)
 
     result_vote = major_voting(scene_ids, obj_feats, obj_feats_binary)
-    save_submission_csv(result_vote, "selab_major_voting.csv")
+    save_submission_csv(result_vote, "noresource_major_voting.csv")
     save_visual_outputs("major_voting", scene_ids, result_vote)
 
     print("✅ All strategies complete.")
