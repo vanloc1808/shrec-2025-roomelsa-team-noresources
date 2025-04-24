@@ -1,12 +1,12 @@
-# Team `NoResource` at the ROOMELSA Challenge at SHREC 2025
+# Team `NoResources` at the ROOMELSA Challenge at SHREC 2025
 
-This is the solution for our team (`NoResource`) at the ROOMELSA Challenge at SHREC 2025. The challenge is for the retrieval of optimal objects for multi-modal enhanced language and spatial assistance. The challenge is organized by the [SHREC](https://www.shrec.net/) team.
+This is the solution for our team (`NoResources`) at the ROOMELSA Challenge at SHREC 2025. The challenge is for the retrieval of optimal objects for multi-modal enhanced language and spatial assistance. The challenge is organized by the [SHREC](https://www.shrec.net/) team.
 
 ## Solution
 
-Technical report will be linked later.
+The technical report will be linked later.
 
-## Running the codes
+## Running the code
 
 ### Environment setup
 
