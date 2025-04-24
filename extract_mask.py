@@ -5,16 +5,16 @@ from tqdm import tqdm
 from scipy import ndimage
 
 SCENE_DIR = "./data/private/scenes"
-MASK_COLOR = (135, 206, 235)  # RGB của vùng mask
-PADDING = 10  # Pixel padding khi crop
+MASK_COLOR = (135, 206, 235)  # RGB of the mask region
+PADDING = 10  # Pixel padding when cropping
 
 def extract_mask_and_crop(image):
     image_np = np.array(image)
 
-    # Tạo mask nhị phân
+    # Create binary mask
     mask = np.all(image_np == MASK_COLOR, axis=-1).astype(np.uint8)
 
-    # Lọc nhiễu: giữ lại connected component lớn nhất
+    # Denoising: keep only the largest connected component
     labeled, num_features = ndimage.label(mask)
     if num_features == 0:
         return Image.fromarray(mask * 255), None
@@ -22,7 +22,7 @@ def extract_mask_and_crop(image):
     sizes = ndimage.sum(mask, labeled, range(1, num_features + 1))
     largest_cc = (labeled == (np.argmax(sizes) + 1)).astype(np.uint8) * 255
 
-    # Tìm bounding box
+    # Find bounding box
     ys, xs = np.where(largest_cc == 255)
     if len(xs) == 0 or len(ys) == 0:
         return Image.fromarray(largest_cc), None
@@ -30,7 +30,7 @@ def extract_mask_and_crop(image):
     x_min, x_max = xs.min(), xs.max()
     y_min, y_max = ys.min(), ys.max()
 
-    # Thêm padding
+    # Add padding
     W, H = image.size
     x_min = max(x_min - PADDING, 0)
     x_max = min(x_max + PADDING, W - 1)
