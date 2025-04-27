@@ -176,3 +176,5 @@ data/
 debug.png
 output_new/
 *.csv
+output/
+outputs/
